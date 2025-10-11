@@ -12,8 +12,8 @@ A Letterboxed clone written in Ruby on Rails 8.
 
 Run `bundle` to install dependencies.
 
-Run `bin/rails db:setup` to create the database and seed it with dev data.
+Run `./bin/rails db:setup` to create the database and seed it with dev data.
 
 ## Dev
 
-Start the Rails server using the Procfile with Foreman or `heroku local`.
+Start the Rails server using the Procfile.dev with Foreman by running `./bin/dev`.
