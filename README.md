@@ -1,6 +1,6 @@
-# Movies
+# Betterboxd
 
-A Letterboxed clone written in Ruby on Rails 8.
+A Letterboxd clone written in Ruby on Rails 8.
 
 ## Requirements
 
