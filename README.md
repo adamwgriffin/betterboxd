@@ -1,24 +1,19 @@
-# README
+# Movies
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Letterboxed clone written in Ruby on Rails 8.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+- Ruby 3.4.7
+- Postgres
+- Heroku CLI (if deploying the app)
 
-* System dependencies
+## Installation
 
-* Configuration
+Run `bundle` to install dependencies.
 
-* Database creation
+Run `bin/rails db:setup` to create the database and seed it with dev data.
 
-* Database initialization
+## Dev
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Start the Rails server using the Procfile with Foreman or `heroku local`.
