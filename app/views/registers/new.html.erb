@@ -1,41 +1,44 @@
-<h1>Register</h1>
+<div class="flex flex-col gap-4 mx-auto max-w-md">
+  <%= form_with model: @user, url: register_path, class: "flex flex-col gap-4" do |form| %>
+    <% if @user.errors.any? %>
+      <div class="text-red-600">
+        <h2 class="semi-bold text-1xl">
+          <%= "Error".pluralize(@user.errors.count) %>
+        </h2>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<%= form_with model: @user, url: register_path do |form| %>
-  <% if @user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this registration:</h2>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
     <%= form.email_field :email_address,
       required: true,
       autofocus: true,
       autocomplete: "username",
       placeholder: "Enter your email address",
-      value: params[:email_address]
+      value: params[:email_address],
+      class: "border rounded-lg p-2"
     %>
-  </div>
 
-  <div>
     <%= form.password_field :password,
       required: true,
       autocomplete: "new-password",
       placeholder: "Enter your password",
-      maxlength: 72
+      maxlength: 72,
+      class: "border rounded-lg p-2"
     %>
-  </div>
+
+    <%=
+      form.submit "Sign Up",
+      class: "cursor-pointer bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-400"
+    %>
+  <% end %>
 
   <div>
-    <%= form.submit "Register" %>
+    Already have an account?
+    <%= link_to "Sign in", new_session_path, class: "text-blue-500 hover:underline" %>
   </div>
-<% end %>
 
-<p>
-  Already have an account? <%= link_to "Sign in", new_session_path %>
-</p>
+</div>

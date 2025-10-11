@@ -1,35 +1,39 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+<div class="flex flex-col gap-4 mx-auto max-w-md">
+  <%= tag.div(flash[:alert], class: "text-red-600") if flash[:alert] %>
+  <%= tag.div(flash[:notice], class: "text-green-600") if flash[:notice] %>
 
-<%= form_with url: session_path do |form| %>
-  <div>
+  <%= form_with url: session_path, class: "flex flex-col gap-4" do |form| %>
     <%= form.email_field :email_address,
       required: true,
       autofocus: true,
       autocomplete: "username",
       placeholder: "Enter your email address",
-      value: params[:email_address]
+      value: params[:email_address],
+      class: "border rounded-lg p-2"
     %>
-  </div>
 
-  <div>
+
     <%= form.password_field :password,
       required: true,
       autocomplete: "current-password",
       placeholder: "Enter your password",
-      maxlength: 72
+      maxlength: 72,
+      class: "border rounded-lg p-2"
     %>
-  </div>
 
-  <div>
-    <%= form.submit "Sign in" %>
-  </div>
-<% end %>
-<br>
+    <%= form.submit "Sign in",
+      class: "cursor-pointer bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-400"
+    %>
+  <% end %>
 
-<p>
-  <%= link_to "Sign up", new_register_url %>
-</p>
-<p>
-  <%= link_to "Forgot password?", new_password_path %>
-</p>
+  <div class="flex flex-col gap-2">
+    <div>
+      <%= link_to "Forgot password?", new_password_path, class: "text-blue-500 hover:underline" %>
+    </div>
+
+    <div>
+      Don't have an account?
+      <%= link_to "Sign up", new_register_url, class: "text-blue-500 hover:underline" %>
+    </div>
+  </div>
+</div>
