@@ -1,0 +1,41 @@
+<h1>Register</h1>
+
+<%= form_with model: @user, url: register_path do |form| %>
+  <% if @user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this registration:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.email_field :email_address,
+      required: true,
+      autofocus: true,
+      autocomplete: "username",
+      placeholder: "Enter your email address",
+      value: params[:email_address]
+    %>
+  </div>
+
+  <div>
+    <%= form.password_field :password,
+      required: true,
+      autocomplete: "new-password",
+      placeholder: "Enter your password",
+      maxlength: 72
+    %>
+  </div>
+
+  <div>
+    <%= form.submit "Register" %>
+  </div>
+<% end %>
+
+<p>
+  Already have an account? <%= link_to "Sign in", new_session_path %>
+</p>
