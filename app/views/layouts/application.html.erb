@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Movies" %></title>
+    <title><%= content_for(:title) || "Betterboxd" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -23,6 +23,21 @@
   </head>
 
   <body>
+    <% if notice %>
+      <div
+        data-controller="dismissible" 
+        class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 relative"
+      >
+        <%= notice %>
+        <button
+          data-action="click->dismissible#dismiss" 
+          class="absolute top-1 right-2 text-green-700 hover:text-green-900 text-xl font-bold leading-none"
+        >
+          ×
+        </button>
+      </div>
+    <% end %>
+    <%= render 'application/header' %>
     <main class="container mx-auto mt-28 px-5">
       <%= yield %>
     </main>
