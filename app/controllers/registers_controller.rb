@@ -1,5 +1,4 @@
 class RegistersController < ApplicationController
-  layout "authentication"
   allow_unauthenticated_access only: [ :new, :create ]
   rate_limit to: 10,
     within: 3.minutes,

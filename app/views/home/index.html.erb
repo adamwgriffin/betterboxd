@@ -1,3 +1,17 @@
+<% if Current.user %>
 <p class="text-3xl text-center">
   Welcome back, <%= Current.user.first_name %>.
 </p>
+<% else %>
+<section class="flex flex-col items-center gap-8">
+  <div class="text-4xl/12 text-white font-bold font-serif">
+    <p>Track movies you've watched.</p>
+    <p>Save those you want to see.</p>
+    <p>Tell your friends what's good.</p>
+  </div>
+  <a href="/register/new" class="btn btn-primary">Get started — it's free!</a>
+  <p class="text-xl">
+    The social network for movie lovers.
+  </p>
+</section>
+<% end %>
