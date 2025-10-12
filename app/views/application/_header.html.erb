@@ -1,25 +1,22 @@
 <header class="bg-gray-950/65">
   <div class="flex items-center justify-between h-18 container mx-auto px-5">
-    <!-- Logo -->
-    <div class="flex items-center">
+    <%= link_to root_path, class: "flex items-center" do %>
       <div class="relative h-5 w-14">
         <div class="bg-orange-400 mix-blend-lighten w-5 h-5 rounded-full absolute top-0 left-0"></div>
         <div class="bg-green-400 mix-blend-lighten w-5 h-5 rounded-full absolute top-0 left-4"></div>
         <div class="bg-cyan-400 mix-blend-lighten w-5 h-5 rounded-full absolute top-0 left-8"></div>
       </div>
-      <%= link_to root_path, class: "text-3xl text-white font-bold hover:text-gray-400" do %>
+      <span class="text-3xl text-white font-bold">
         Betterboxd
-      <% end %>
-    </div>
+      </span>
+    <% end %>
 
-    <!-- Navigation -->
     <nav class="hidden md:flex items-center space-x-8">
-      <%= link_to "Movies", "#", class: "hover:text-gray-400" %>
-      <%= link_to "Reviews", "#", class: "hover:text-gray-400" %>
-      <%= link_to "Lists", "#", class: "hover:text-gray-400" %>
+      <%= link_to "Movies", "#", class: "hover:text-gray-50" %>
+      <%= link_to "Reviews", "#", class: "hover:text-gray-50" %>
+      <%= link_to "Lists", "#", class: "hover:text-gray-50" %>
     </nav>
 
-    <!-- User Menu -->
     <%= render 'application/user_menu' %>
   </div>
 </header>
