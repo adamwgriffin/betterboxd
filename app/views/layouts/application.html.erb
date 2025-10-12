@@ -22,7 +22,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="h-screen flex flex-col">
     <% if notice %>
       <div
         data-controller="dismissible" 
@@ -38,8 +38,9 @@
       </div>
     <% end %>
     <%= render 'application/header' %>
-    <main class="container mx-auto mt-18 px-5">
+    <main class="container mx-auto mt-18 px-5 flex-grow">
       <%= yield %>
     </main>
+    <%= render 'application/footer' %>
   </body>
 </html>
