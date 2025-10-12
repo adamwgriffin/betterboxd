@@ -20,32 +20,6 @@
     </nav>
 
     <!-- User Menu -->
-    <div class="flex items-center space-x-4">
-      <% if Current.user %>
-        <div class="flex items-center space-x-4">
-          <span class="text-sm">
-            Hello, <%= Current.user.first_name %>
-          </span>
-          <%= button_to "Log out",
-            session_path,
-            method: :delete, 
-            class: "text-sm bg-gray-100 hover:bg-gray-200 px-3 py-2 rounded-md
-            text-gray-700"
-          %>
-        </div>
-      <% else %>
-        <div class="flex items-center space-x-3">
-          <%= link_to "Sign In",
-            new_session_path, 
-            class: "text-sm hover:text-gray-400"
-          %>
-          <%= link_to "Sign Up",
-            new_register_path, 
-            class: "text-sm bg-blue-500 hover:bg-blue-600 text-white px-4 py-2
-            rounded-md"
-          %>
-        </div>
-      <% end %>
-    </div>
+    <%= render 'application/user_menu' %>
   </div>
 </header>
