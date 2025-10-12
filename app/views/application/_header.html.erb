@@ -12,9 +12,9 @@
     <% end %>
 
     <nav class="hidden md:flex items-center space-x-8">
-      <%= link_to "Movies", "#", class: "hover:text-gray-50" %>
-      <%= link_to "Reviews", "#", class: "hover:text-gray-50" %>
-      <%= link_to "Lists", "#", class: "hover:text-gray-50" %>
+      <%= link_to "Movies", movies_path, class: "header-link" %>
+      <%= link_to "Lists", lists_path, class: "header-link" %>
+      <%= link_to "Members", members_path, class: "header-link" %>
     </nav>
 
     <%= render 'application/user_menu' %>

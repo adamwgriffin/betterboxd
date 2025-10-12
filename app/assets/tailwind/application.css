@@ -19,6 +19,10 @@
     @apply text-white font-medium hover:text-cyan-400;
   }
 
+  .header-link {
+    @apply hover:text-gray-50;
+  }
+
   .promopanel {
     @apply bg-gray-600 rounded-md p-6;
   }
