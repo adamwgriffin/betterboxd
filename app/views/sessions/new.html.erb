@@ -7,33 +7,30 @@
       required: true,
       autofocus: true,
       autocomplete: "username",
-      placeholder: "Enter your email address",
+      placeholder: "Email address",
       value: params[:email_address],
       class: "border rounded-lg p-2"
     %>
 
-
     <%= form.password_field :password,
       required: true,
       autocomplete: "current-password",
-      placeholder: "Enter your password",
+      placeholder: "Password",
       maxlength: 72,
       class: "border rounded-lg p-2"
     %>
 
-    <%= form.submit "Sign in",
-      class: "cursor-pointer bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-400"
-    %>
+    <%= form.submit "Sign in", class: "btn btn-primary" %>
   <% end %>
 
   <div class="flex flex-col gap-2">
     <div>
-      <%= link_to "Forgot password?", new_password_path, class: "text-blue-500 hover:underline" %>
+      <%= link_to "Forgot password?", new_password_path, class: "link" %>
     </div>
 
     <div>
       Don't have an account?
-      <%= link_to "Sign up", new_register_url, class: "text-blue-500 hover:underline" %>
+      <%= link_to "Sign up", new_register_url, class: "link" %>
     </div>
   </div>
 </div>

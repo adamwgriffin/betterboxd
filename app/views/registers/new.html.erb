@@ -2,7 +2,7 @@
   <%= form_with model: @user, url: register_path, class: "flex flex-col gap-4" do |form| %>
     <% if @user.errors.any? %>
       <div class="text-red-600">
-        <h2 class="semi-bold text-1xl">
+        <h2 class="font-semibold text-1xl">
           <%= "Error".pluralize(@user.errors.count) %>
         </h2>
         <ul>
@@ -17,21 +17,21 @@
       required: true,
       autofocus: true,
       autocomplete: "given-name",
-      placeholder: "Enter your first name",
+      placeholder: "First name",
       class: "border rounded-lg p-2"
     %>
 
     <%= form.text_field :last_name,
       required: true,
       autocomplete: "family-name",
-      placeholder: "Enter your last name",
+      placeholder: "Last name",
       class: "border rounded-lg p-2"
     %>
 
     <%= form.email_field :email_address,
       required: true,
       autocomplete: "username",
-      placeholder: "Enter your email address",
+      placeholder: "Email address",
       value: params[:email_address],
       class: "border rounded-lg p-2"
     %>
@@ -39,20 +39,17 @@
     <%= form.password_field :password,
       required: true,
       autocomplete: "new-password",
-      placeholder: "Enter your password",
+      placeholder: "Password",
       maxlength: 72,
       class: "border rounded-lg p-2"
     %>
 
-    <%=
-      form.submit "Sign Up",
-      class: "cursor-pointer bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-400"
-    %>
+    <%= form.submit "Sign Up", class: "btn btn-primary" %>
   <% end %>
 
   <div>
     Already have an account?
-    <%= link_to "Sign in", new_session_path, class: "text-blue-500 hover:underline" %>
+    <%= link_to "Sign in", new_session_path, class: "link" %>
   </div>
 
 </div>

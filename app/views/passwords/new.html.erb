@@ -8,13 +8,13 @@
       required: true,
       autofocus: true,
       autocomplete: "username",
-      placeholder: "Enter your email address",
+      placeholder: "Email address",
       value: params[:email_address],
       class: "border rounded-lg p-2"
     %>
 
     <%= form.submit "Email reset instructions",
-      class: "cursor-pointer bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-400"
+      class: "btn btn-primary"
     %>
   <% end %>
 </div>
