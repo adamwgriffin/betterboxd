@@ -15,12 +15,17 @@
         <%= @user.name || @user.username %>
       </h1>
       
+      <div class="flex gap-4 text-sm text-gray-300 mb-2">
+        <span><%= @user.following_count %> Following</span>
+        <span><%= @user.followers_count %> Followers</span>
+      </div>
+      
       <div class="flex gap-6">
         <% if @user.location.present? %>
-        <span class="inline-flex items-center">
-          📍 <%= @user.location %>
-        </span>
-      <% end %>
+          <span class="inline-flex items-center">
+            📍 <%= @user.location %>
+          </span>
+        <% end %>
       
       <% if @user.website.present? %>
         <a href="<%= @user.website %>" target="_blank" rel="noopener" class="link">
@@ -28,6 +33,25 @@
         </a>
       <% end %>
       </div>
+      
+      <% if Current.user && Current.user != @user %>
+        <div class="mt-3">
+          <% if Current.user.following?(@user) %>
+            <%= button_to "Unfollow",
+              unfollow_user_path(@user.username), 
+              method: :delete, 
+              class: "btn bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md text-sm",
+              data: { confirm: "Are you sure you want to unfollow @#{@user.username}?" }
+            %>
+          <% else %>
+            <%= button_to "Follow",
+              follow_user_path(@user.username), 
+              method: :post, 
+              class: "btn btn-primary px-4 py-2 rounded-md text-sm"
+            %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 

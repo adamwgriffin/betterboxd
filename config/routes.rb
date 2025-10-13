@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resources :members, only: [ :index ]
   resources :users, only: [ :show ], param: :username
 
+  # Follow/unfollow routes
+  post "/users/:username/follow", to: "follows#create", as: :follow_user
+  delete "/users/:username/follow", to: "follows#destroy", as: :unfollow_user
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
