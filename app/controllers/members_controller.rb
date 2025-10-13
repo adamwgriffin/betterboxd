@@ -3,4 +3,8 @@ class MembersController < ApplicationController
   # require them to be logged in to view the page
   allow_unauthenticated_access
   before_action :resume_session
+
+  def index
+    @users = User.all.limit(50)
+  end
 end
