@@ -14,7 +14,6 @@
     <% end %>
 
     <%= form.text_field :first_name,
-      required: true,
       autofocus: true,
       autocomplete: "given-name",
       placeholder: "First name",
@@ -22,7 +21,6 @@
     %>
 
     <%= form.text_field :last_name,
-      required: true,
       autocomplete: "family-name",
       placeholder: "Last name",
       class: "border rounded-lg p-2"
@@ -30,9 +28,17 @@
 
     <%= form.email_field :email_address,
       required: true,
-      autocomplete: "username",
+      autocomplete: "email",
       placeholder: "Email address",
       value: params[:email_address],
+      class: "border rounded-lg p-2"
+    %>
+
+    <%= form.text_field :username,
+      required: true,
+      autocomplete: "username",
+      placeholder: "Username",
+      value: params[:username],
       class: "border rounded-lg p-2"
     %>
 
