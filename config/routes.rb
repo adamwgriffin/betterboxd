@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :movies, only: [ :index ]
   resources :lists, only: [ :index ]
   resources :members, only: [ :index ]
+  resources :users, only: [ :show ], param: :username
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

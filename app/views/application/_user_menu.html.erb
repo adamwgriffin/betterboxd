@@ -19,7 +19,8 @@
           group-hover:visible transition-all duration-200 z-50"
       >
         <div class="py-1">
-          <%= link_to "#", class: "block px-4 py-2 text-sm text-gray-700
+          <%= link_to user_path(Current.user.username),
+            class: "block px-4 py-2 text-sm text-gray-700
             hover:bg-gray-500 hover:text-gray-50" do %>
             Profile
           <% end %>

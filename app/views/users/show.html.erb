@@ -1,0 +1,42 @@
+<% content_for(:title, "#{@user.name || @user.username}'s profile - Betterboxd") %>
+
+<div class="flex flex-col gap-6">
+  <div class="flex items-center gap-4">
+    <div class="flex-shrink-0">
+      <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
+        <span class="text-gray-600 text-2xl font-bold">
+          <%= @user.first_name&.first&.upcase + @user.last_name.first.upcase %>
+        </span>
+      </div>
+    </div>
+    
+    <div class="flex-1">      
+      <h1 class="text-white text-3xl font-bold">
+        <%= @user.name || @user.username %>
+      </h1>
+      
+      <div class="flex gap-6">
+        <% if @user.location.present? %>
+        <span class="inline-flex items-center">
+          📍 <%= @user.location %>
+        </span>
+      <% end %>
+      
+      <% if @user.website.present? %>
+        <a href="<%= @user.website %>" target="_blank" rel="noopener" class="link">
+          🔗 <%= @user.website %>
+        </a>
+      <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if @user.bio.present? %>
+    <div class="max-w-42">
+      <h2 class="font-semibold pb-2 border-b border-b-gray-300">Bio</h2>
+      <p class="py-2">
+        <%= simple_format(@user.bio) %>
+      </p>
+    </div>
+  <% end %>
+</div>

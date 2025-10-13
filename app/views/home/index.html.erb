@@ -1,6 +1,11 @@
 <% if Current.user %>
 <p class="text-3xl text-center">
-  Welcome back, <%= Current.user.first_name %>.
+  Welcome back, 
+  <%=
+    link_to (Current.user.first_name || Current.user.username),
+    user_path(Current.user.username),
+    class: "white font-semi-bold underline decoration-1 underline-offset-4"
+  %>.
 </p>
 <% else %>
 <section class="flex flex-col items-center gap-8">
