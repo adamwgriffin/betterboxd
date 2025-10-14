@@ -5,6 +5,10 @@ class MoviesController < ApplicationController
   before_action :resume_session
 
   def index
-    # TODO: Add logic here to fetch movies from the database
+    @movies = Movie.all.limit(4)
+  end
+
+  def show
+    @movie = Movie.find(params[:id])
   end
 end

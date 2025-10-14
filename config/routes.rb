@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
   resource :register, only: [ :new, :create ]
-  resources :movies, only: [ :index ]
+  resources :movies, only: [ :index, :show ]
   resources :lists, only: [ :index ]
   resources :members, only: [ :index ]
   resources :users, only: [ :show ], param: :username

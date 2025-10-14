@@ -1,1 +1,18 @@
-<p>TBD</p>
+<h2 class="font-semibold pb-2 mb-4 border-b border-b-gray-300">
+  Popular movies this week
+</h2>
+
+<ul class="flex gap-4 mx-auto justify-center">
+  <% @movies.each do |movie| %>
+    <li>
+      <%= link_to movie_path(movie) do %>
+        <%=
+          image_tag "https://image.tmdb.org/t/p/w500/#{movie.poster_path}",
+          width: 250,
+          alt: "#{movie.title} poster",
+          class: "rounded"
+        %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
