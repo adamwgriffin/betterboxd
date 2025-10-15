@@ -1,4 +1,4 @@
-<div class="flex flex-col md:flex-row gap-4">
+<section class="flex flex-col md:flex-row gap-4 mb-12">
   <%=
     image_tag "https://image.tmdb.org/t/p/w342/#{@movie.poster_path}",
     width: 171,
@@ -16,4 +16,24 @@
 
     <p><%= @movie.overview %></p>
   </div>
-</div>
+</section>
+
+<section>
+  <h1 class="section-heading">
+    Recent reviews
+  </h1>
+
+  <ul class="space-y-4">
+    <% @reviews.each do |review| %>
+      <li>
+        <article class="flex flex-col gap-2">
+          <header>
+            Review by 
+            <%= link_to review.user.username, user_path(review.user.username) %>
+          </header>
+          <p><%= review.body %></p>
+        </article>
+      </li>
+    <% end %>
+  </ul>
+</section>

@@ -1,15 +1,16 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :sessions, dependent: :destroy
 
   validates :username, presence: true, uniqueness: true
   validates :email_address, presence: true, uniqueness: true
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
+  has_many :sessions, dependent: :destroy
   has_many :active_follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   has_many :passive_follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
   has_many :following, through: :active_follows, source: :followed
   has_many :followers, through: :passive_follows, source: :follower
+  has_many :reviews, dependent: :destroy
 
   def name
     [ first_name, last_name ].reject(&:blank?).join(" ").presence

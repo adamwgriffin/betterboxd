@@ -1,18 +1,41 @@
-<h2 class="font-semibold pb-2 mb-4 border-b border-b-gray-300">
-  Popular movies this week
-</h2>
+<section class="mb-12">
+    <h1 class="section-heading">
+    Popular movies this week
+  </h1>
 
-<ul class="flex gap-4 mx-auto justify-center">
-  <% @movies.each do |movie| %>
-    <li>
-      <%= link_to movie_path(movie) do %>
+  <ul class="flex gap-4 mx-auto justify-center">
+    <% @movies.each do |movie| %>
+      <li>
+        <%= link_to movie_path(movie) do %>
+          <%=
+            image_tag "https://image.tmdb.org/t/p/w500/#{movie.poster_path}",
+            width: 250,
+            alt: "#{movie.title} poster",
+            class: "rounded"
+          %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<section>
+  <h1 class="section-heading">
+    Popular reviews this week
+  </h1>
+
+  <ul class="space-y-4">
+    <% @reviews.each do |review| %>
+      <li>
         <%=
-          image_tag "https://image.tmdb.org/t/p/w500/#{movie.poster_path}",
-          width: 250,
-          alt: "#{movie.title} poster",
-          class: "rounded"
+          render 'application/review_list_item',
+            locals: {
+              review: review,
+              movie: review.movie,
+              user: review.user
+            }
         %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+      </li>
+    <% end %>
+  </ul>
+</section>

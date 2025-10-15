@@ -23,6 +23,10 @@
     @apply hover:text-gray-50;
   }
 
+  .section-heading {
+    @apply font-semibold pb-2 mb-4 border-b border-b-gray-300;
+  }
+
   .promopanel {
     @apply bg-gray-600 rounded-md p-6;
   }

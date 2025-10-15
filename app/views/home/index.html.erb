@@ -18,6 +18,7 @@
   <p class="text-xl">
     The social network for movie lovers.
   </p>
+
   <div>
     <p class="text-xl mb-2">Betterboxd lets you...</p>
     <ul class="grid grid-cols-3 gap-4">
@@ -42,5 +43,26 @@
       </li>
     </ul>
   </div>
+</section>
+
+<section class="mt-12">
+  <h1 class="section-heading">
+    Popular reviews this week
+  </h1>
+
+  <ul class="space-y-4">
+    <% @reviews.each do |review| %>
+      <li>
+        <%=
+          render 'application/review_list_item',
+            locals: {
+              review: review,
+              movie: review.movie,
+              user: review.user
+            }
+        %>
+      </li>
+    <% end %>
+  </ul>
 </section>
 <% end %>

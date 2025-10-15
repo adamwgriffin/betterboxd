@@ -1,0 +1,30 @@
+<article class="flex gap-4">
+  <%=
+    image_tag "https://image.tmdb.org/t/p/w185/#{locals[:movie].poster_path}",
+    width: 92,
+    alt: "#{locals[:movie].title} poster",
+    class: "rounded"
+  %>
+  <div class="flex flex-col gap-2">
+    <header class="flex items-center gap-4">
+      <h2 class="text-2xl font-semibold">
+        <%= 
+          link_to locals[:movie].title,
+            movie_path(locals[:movie]),
+            class: "link"
+        %>
+      </h2>
+      <span class="text-lg font-thin"><%= locals[:movie].release_date.year %></span>
+    </header>
+    <div>
+      <%=
+        link_to locals[:user].username,
+          user_path(locals[:user].username),
+          class: "link"
+      %>
+    </div>
+    <p>
+      <%= locals[:review].body %>
+    </p>
+  </div>
+</article>

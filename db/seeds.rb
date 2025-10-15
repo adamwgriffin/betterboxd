@@ -200,5 +200,42 @@ sample_movies.each do |movie_data|
   end
 end
 
+puts "\nCreating reviews for movies with posters..."
+
+# Sample review content for different types of movies
+review_templates = [
+  "An absolute masterpiece! This film changed cinema forever and continues to inspire new generations of filmmakers.",
+  "Incredible storytelling with stunning visuals. A few minor pacing issues, but overall an exceptional experience.",
+  "Pure cinematic poetry. Every frame is crafted with care and the emotional impact is profound.",
+  "Brilliant direction and performances. This one will stick with you long after the credits roll.",
+  "Solid film with great moments, though it doesn't quite reach the heights of perfection. Still worth watching.",
+  "A genre-defining classic that set the standard for everything that followed. Timeless and essential viewing.",
+  "Expertly crafted with incredible attention to detail. The world-building is second to none.",
+  "Transcendent filmmaking that operates on multiple levels. A true work of art disguised as entertainment."
+]
+
+movies_with_posters = Movie.where.not(poster_path: nil)
+review_count = 0
+
+movies_with_posters.each do |movie|
+  reviewers = users.sample(rand(3..6))
+
+  reviewers.each do |user|
+    # Avoid duplicate reviews when re-running seeds
+    next if Review.exists?(user: user, movie: movie)
+
+    random_date = rand(2.years.ago..Time.current)
+
+    Review.find_or_create_by!(
+      user: user,
+      movie: movie,
+      body: review_templates.sample,
+      date_watched: random_date
+    )
+
+    review_count += 1
+  end
+end
+
 puts "\n🎬 Development seed complete!"
-puts "Created #{User.count} users with #{follow_count} follow relationships and #{Movie.count} movies"
+puts "Created #{User.count} users with #{follow_count} follow relationships, #{Movie.count} movies, and #{review_count} reviews"

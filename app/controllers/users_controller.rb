@@ -9,7 +9,8 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by!(username: params[:username])
+    @user = User.includes(:reviews).find_by!(username: params[:username])
+    @reviews = @user.reviews.includes(:movie)
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path, alert: "User not found"
   end

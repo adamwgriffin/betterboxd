@@ -6,9 +6,11 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all.limit(4)
+    @reviews = Review.includes(:user, :movie).all.limit(10).order(date_watched: :desc)
   end
 
   def show
     @movie = Movie.find(params[:id])
+    @reviews = Review.includes(:user).where(movie: @movie).limit(4).order(date_watched: :desc)
   end
 end
