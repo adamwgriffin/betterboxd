@@ -1,11 +1,20 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+pulp_fiction:
+  title: "Pulp Fiction"
+  release_date: 1994-10-14
+  tagline: "Just because you are a character doesn't mean you have character."
+  overview: "A burger-loving hit man, his philosophical partner, a drug-addled gangster's moll and a washed-up boxer converge in this sprawling, comedic crime caper."
+  poster_path: "/dM2w364MScsjFf8pfMbaWUcWrR.jpg"
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+the_matrix:
+  title: "The Matrix"
+  release_date: 1999-03-31
+  tagline: "Welcome to the Real World"
+  overview: "Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the vast and powerful computers who now rule the earth."
+  poster_path: "/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg"
+
+blank_movie:
+  title: ""
+  release_date: 2023-01-01
+  tagline: "A movie with no title"
+  overview: "This movie has no title for testing validation."
+  poster_path: "/blank.jpg"
