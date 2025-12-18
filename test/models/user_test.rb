@@ -3,7 +3,10 @@ require "test_helper"
 class UserTest < ActiveSupport::TestCase
   def setup
     @user = users(:one)
+    @other_user = users(:two)
   end
+
+  # Validation tests
 
   test "should be valid with valid attributes" do
     assert @user.valid?
@@ -59,31 +62,158 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "test@example.com", @user.reload.email_address
   end
 
-  test "name should return full name when both first and last name present" do
+  # Association tests
+
+  test "should have many sessions" do
+    assert_respond_to @user, :sessions
+  end
+
+  test "should destroy associated sessions when user is destroyed" do
+    session = @user.sessions.create!(
+      ip_address: "127.0.0.1",
+      user_agent: "Test Browser"
+    )
+    session_id = session.id
+    @user.destroy!
+
+    assert_raises(ActiveRecord::RecordNotFound) do
+      Session.find(session_id)
+    end
+  end
+
+  test "should have many reviews" do
+    assert_respond_to @user, :reviews
+  end
+
+  test "should destroy associated reviews when user is destroyed" do
+    movie = movies(:pulp_fiction)
+    review = @user.reviews.create!(
+      movie: movie,
+      body: "Great movie!",
+      date_watched: Date.current
+    )
+    review_id = review.id
+    @user.destroy!
+
+    assert_raises(ActiveRecord::RecordNotFound) do
+      Review.find(review_id)
+    end
+  end
+
+  test "should have many follower_follows" do
+    assert_respond_to @user, :follower_follows
+  end
+
+  test "should destroy follower_follows when user is destroyed" do
+    @user.follow(@other_user)
+    follow_id = @user.follower_follows.first.id
+    @user.destroy!
+
+    assert_raises(ActiveRecord::RecordNotFound) do
+      Follow.find(follow_id)
+    end
+  end
+
+  test "should have many followed_follows" do
+    assert_respond_to @user, :followed_follows
+  end
+
+  test "should destroy followed_follows when user is destroyed" do
+    @other_user.follow(@user)
+    follow_id = @user.followed_follows.first.id
+    @user.destroy!
+
+    assert_raises(ActiveRecord::RecordNotFound) do
+      Follow.find(follow_id)
+    end
+  end
+
+  test "should have many following" do
+    assert_respond_to @user, :following
+  end
+
+  test "should have many followers" do
+    assert_respond_to @user, :followers
+  end
+
+  # Instance method tests
+
+  test "#name should return full name when both first and last name present" do
     @user.first_name = "John"
     @user.last_name = "Doe"
 
     assert_equal "John Doe", @user.name
   end
 
-  test "name should return first name only when last name blank" do
+  test "#name should return first name only when last name blank" do
     @user.first_name = "John"
     @user.last_name = ""
 
     assert_equal "John", @user.name
   end
 
-  test "name should return last name only when first name blank" do
+  test "#name should return last name only when first name blank" do
     @user.first_name = ""
     @user.last_name = "Doe"
 
     assert_equal "Doe", @user.name
   end
 
-  test "name should return nil when both names blank" do
+  test "#name should return nil when both names blank" do
     @user.first_name = ""
     @user.last_name = ""
 
     assert_nil @user.name
+  end
+
+  test "#follow should be able to follow another user" do
+    assert_not @user.following?(@other_user)
+
+    @user.follow(@other_user)
+
+    assert @user.following.include?(@other_user)
+  end
+
+  test "#follow should not allow users to follow themselves" do
+    assert_raises(RuntimeError, "Users can't follow themselves") do
+      @user.follow(@user)
+    end
+  end
+
+  test "#follow should not create duplicate follow relationships" do
+    @user.follow(@other_user)
+
+    assert_raises(RuntimeError, "Already following user") do
+      @user.follow(@other_user)
+    end
+  end
+
+  test "#unfollow should be able to unfollow a user" do
+    @user.follow(@other_user)
+    assert @user.following?(@other_user)
+
+    @user.unfollow(@other_user)
+
+    assert_not @user.following.include?(@other_user)
+  end
+
+  test "#unfollow should raise an error when unfollowing a user that is not being followed" do
+    assert_not @user.following?(@other_user)
+
+    assert_raises(RuntimeError, "User is not being followed") do
+      @user.unfollow(@other_user)
+    end
+  end
+
+  test "#following? should return true for followed users" do
+    assert_not @user.following?(@other_user)
+
+    @user.follow(@other_user)
+
+    assert @user.following?(@other_user)
+  end
+
+  test "following? should return false for non-followed users" do
+    assert_not @user.following?(@other_user)
   end
 end
