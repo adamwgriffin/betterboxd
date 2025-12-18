@@ -6,10 +6,18 @@ class User < ApplicationRecord
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   has_many :sessions, dependent: :destroy
-  has_many :active_follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
-  has_many :passive_follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
-  has_many :following, through: :active_follows, source: :followed
-  has_many :followers, through: :passive_follows, source: :follower
+
+  # Associations for Follow record relations
+  # Follow records where this user is following another user
+  has_many :follower_follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+  # Follow records where another user is following this user
+  has_many :followed_follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
+
+  # Associations for following/followers User records
+  # Makes use for the Follow assocaions above to get the users for each type of follow
+  has_many :following, through: :follower_follows, source: :followed
+  has_many :followers, through: :followed_follows, source: :follower
+
   has_many :reviews, dependent: :destroy
 
   def name
