@@ -26,7 +26,8 @@ class User < ApplicationRecord
 
   def follow(other_user)
     raise "Users can't follow themselves" if self == other_user
-    following << other_user unless following?(other_user)
+    raise "Already following user" if following?(other_user)
+    following << other_user
   end
 
   def unfollow(other_user)
