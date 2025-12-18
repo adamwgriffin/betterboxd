@@ -1,14 +1,18 @@
 # Betterboxd
 
-A Letterboxd clone written in Ruby on Rails 8.
+A Letterboxd clone written in Ruby on Rails 8. The main goal is to test out
+building a full stack app the Rails way, without adding dependencies like React,
+etc. We're also using the authentication provided by the [Rails 8 authentication
+generator](https://guides.rubyonrails.org/security.html#authentication).
 
 ## Requirements
 
 - Ruby 3.4.7
 - Postgres
-- Heroku CLI (if deploying the app)
 
 ## Installation
+
+Install Ruby and Postgres on your machine if you don't already have them.
 
 Run `bundle` to install dependencies.
 
