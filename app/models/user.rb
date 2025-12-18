@@ -14,7 +14,13 @@ class User < ApplicationRecord
   has_many :followed_follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
 
   # Associations for following/followers User records
-  # Makes use for the Follow assocaions above to get the users for each type of follow
+  #
+  # Makes use for the Follow assocaions above to get the users for each type of
+  # follow
+  #
+  # The source option tells Rails which association on the intermediate model to
+  # follow to get to the final records. There's a corresponding belongs_to
+  # association in the Follow model with the same name that wires them together.
   has_many :following, through: :follower_follows, source: :followed
   has_many :followers, through: :followed_follows, source: :follower
 
