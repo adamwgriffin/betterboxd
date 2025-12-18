@@ -6,10 +6,24 @@ class User < ApplicationRecord
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   has_many :sessions, dependent: :destroy
-  has_many :active_follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
-  has_many :passive_follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
-  has_many :following, through: :active_follows, source: :followed
-  has_many :followers, through: :passive_follows, source: :follower
+
+  # Associations for Follow record relations
+  # Follow records where this user is following another user
+  has_many :follower_follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+  # Follow records where another user is following this user
+  has_many :followed_follows, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
+
+  # Associations for following/followers User records
+  #
+  # Makes use for the Follow assocaions above to get the users for each type of
+  # follow
+  #
+  # The source option tells Rails which association on the intermediate model to
+  # follow to get to the final records. There's a corresponding belongs_to
+  # association in the Follow model with the same name that wires them together.
+  has_many :following, through: :follower_follows, source: :followed
+  has_many :followers, through: :followed_follows, source: :follower
+
   has_many :reviews, dependent: :destroy
 
   def name
@@ -18,22 +32,17 @@ class User < ApplicationRecord
 
   def follow(other_user)
     raise "Users can't follow themselves" if self == other_user
-    following << other_user unless following?(other_user)
+    raise "Already following user" if following?(other_user)
+    following << other_user
   end
 
   def unfollow(other_user)
-    following.delete(other_user)
+    follow = follower_follows.find_by(followed: other_user)
+    raise "User is not being followed" if follow.nil?
+    follow.destroy!
   end
 
   def following?(other_user)
     following.include?(other_user)
-  end
-
-  def following_count
-    following.count
-  end
-
-  def followers_count
-    followers.count
   end
 end

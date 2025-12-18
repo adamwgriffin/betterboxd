@@ -1,11 +1,11 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+one:
+  user: one
+  movie: pulp_fiction
+  body: "Absolutely amazing movie! The non-linear narrative is brilliant."
+  date_watched: 2023-01-15
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+two:
+  user: two
+  movie: the_matrix
+  body: "Mind-bending action movie that changed cinema forever."
+  date_watched: 2023-02-10
